@@ -6,25 +6,7 @@
   <link rel="stylesheet" href="style.css" />
   <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-  <script>
-  var app = angular.module("questionnaire", []);
-app.controller("myCtrl", function($scope) {
-    $scope.questions = [
-	{
-		question: "De quel pays venez-vous ?",
-		options: ["Syrie", "Turquie", "Iraq", "Israel","Egypte","autre"]
-	},
-	{
-		question: "Quels sont les problemes qui vous touchent le plus ?",
-		options: ["Alimentation", "Hygienne", "Accès à l'eau", "Education"],
-	},
-	{
-		question: "Avez vous de la famille dans un autre pays ?",
-		options: ["Oui", "Non"],
-	},
-	];
-});
-  </script>
+  <script src = "app.js"></script>
 </head>
 
 <body>
