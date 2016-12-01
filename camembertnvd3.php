@@ -17,27 +17,45 @@
 
 <?php
 
+
 // 1 : on ouvre le fichier
-$testJson = '{"ref1":{"name" : "UnixCorn","depart" : "DuNord","arrivee" : "arrives[i]","besoins" : {"Faim" : "3","Soif" : "3"}}}';
 $monfichier = fopen('data.json', 'r');
-//$fichiercsv = fopen('dataexemple.csv', 'r');
+$ligne = fgets($monfichier);
+$fichiercsv = fopen('dataexemple.csv', 'r+');
 
-//$data = json_decode($monfichier);
-$testdata = json_decode($testJson);
-echo $testdata["ref1"]["name"];
+$data = json_decode($ligne, TRUE);
 
-//if (empty($data)) {
-//  echo '$var vaut soit 0, vide, ou pas définie du tout';
-//}
 
-//
-//echo 
-//foreach ($testJson as $personne) {
-//  echo ;
-//}
+foreach($data as $element){
+  echo $element["name"] . "<br />"; // affichera $prenoms[0], $prenoms[1] etc.
+
+}
+fseek($fichiercsv, 0);
+fputs($fichiercsv, 'localisation,population'."\n");
+$listeProvenance = array ();
+
+foreach($data as $element){
+  if (array_key_exists($element["depart"], $listeProvenance))
+  {
+    $listeProvenance[$element["depart"]] ++;
+  }
+  else {
+    $listeProvenance[$element["depart"]] = 1;
+  }
+
+
+}
+foreach ($listeProvenance as $key => $value) {
+  $ligne = $key . "," . $value . "\n";
+  fputs($fichiercsv, $ligne);
+}
 
 fclose($monfichier);
-//fclose($fichiercsv);
+fclose($fichiercsv);
+
+
+
+
 
 ?>
 
@@ -68,7 +86,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-d3.csv("data.csv", type, function(error, data) {
+d3.csv("dataexemple.csv", type, function(error, data) {
   if (error) throw error;
 
   var g = svg.selectAll(".arc")
@@ -78,12 +96,12 @@ d3.csv("data.csv", type, function(error, data) {
 
   g.append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.age); });
+      .style("fill", function(d) { return color(d.data.localisation); });
 
   g.append("text")
       .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
       .attr("dy", ".35em")
-      .text(function(d) { return d.data.age; });
+      .text(function(d) { return d.data.localisation; });
 });
 
 function type(d) {
