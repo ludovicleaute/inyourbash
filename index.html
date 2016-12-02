@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>Questionnaire</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-  <script src = "app.js"></script>
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="app.js"></script>
 </head>
 
 <body>
 
-	<h1 class="title">Questionnaire</h1>
-    <div ng-app="questionnaire" ng-controller="myCtrl">
-    	<ul>
-        	<div ng-repeat="ques in questions">{{ques.question}}
-        		<li ng-repeat="opt in ques.options">
-        			<label>{{opt}}:<input type="checkbox"/>
-        		</li>
-        	
-        	</div>
-    	</ul>
-	</div>
+	<div ng-app="formApp" ng-controller="formController">
+
+	<h2>De quel pays venez-vous ?</h2>
+        <div class="form-group">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="paysOrigine" value="Syrie" ng-model="formData.paysOrigine">
+                    Syrie
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="paysOrigine" value="Turquie" ng-model="formData.paysOrigine">
+                    Turquie
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="paysOrigine" value="Ukraine" ng-model="formData.paysOrigine">
+                    Ukraine
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="paysOrigine" value="Irak" ng-model="formData.paysOrigine">
+                    Irak
+                </label>
+            </div>
+        </div>
+    <h2>Quels sont les problemes qui vous touchent le plus ?</h2>
+        <div class="form-group">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="probleme" value="alimentation" ng-model="formData.probleme">
+                   Alimentation
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="probleme" value="sante" ng-model="formData.probleme">
+                    Sante
+                </label>
+            </div>    
+        	 <div class="radio">
+                <label>
+                    <input type="radio" name="probleme" value="education" ng-model="formData.probleme">
+                    Education
+                </label>
+            </div>
+	<h2>Sample Form Object</h2>
+    <pre>
+        {{ formData | json}}
+    </pre>
     
-
+    
+	</div>
 </body>
-
 </html>
+
